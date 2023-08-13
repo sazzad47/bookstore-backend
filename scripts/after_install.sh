@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create the .env file
-touch /home/ec2-user/bookstore/.env
+touch /home/ec2-user/bookstore/test
 
 # Get the parameter values and append them to the .env file
 echo DATABASE_URL=$(aws ssm get-parameters --output text --region ap-south-1 --names DATABASE_URL --with-decryption --query Parameters[0].Value) >> /home/ec2-user/bookstore/.env
