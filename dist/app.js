@@ -13,7 +13,10 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
 app.use((0, morgan_1.default)("dev"));
-// Use the centralized router
+// routes
+app.get('/', (req, res) => {
+    res.send('<h1>App is running</h1> <h4>Message: Success</h4> <p>Version 1.1</p>');
+});
 app.use("/api", routes_1.default);
 // Error handling middleware
 app.use((error, _req, res, _next) => {
@@ -21,7 +24,7 @@ app.use((error, _req, res, _next) => {
     res.status(500).json({ message: "Internal server error" });
 });
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
