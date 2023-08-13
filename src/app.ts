@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 
 // routes
 app.get('/', (req, res) => {
-  res.send('<h1>App is running</h1> <h4>Message: Success</h4> <p>Version 1.1</p>');
+  res.send('<h1>App is running</h1>');
 })
 app.use("/api", routes);
 
