@@ -11,7 +11,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
-// Use the centralized router
+// routes
+app.get('/', (req, res) => {
+  res.send('<h1>App is running</h1> <h4>Message: Success</h4> <p>Version 1.1</p>');
+})
 app.use("/api", routes);
 
 // Error handling middleware
