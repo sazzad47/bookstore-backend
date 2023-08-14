@@ -54,15 +54,22 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Book purchased successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Purchase"
+            }
+          },
+          "400": {
+            "description": "Error in purchasing book",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
-          "400": {
-            "description": "Error in purchasing book",
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"

@@ -16,7 +16,18 @@ const createPurchaseController = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        if (error instanceof ClientError) {
+            res.status(400).json({ message: error.message });
+        }
+        else {
+            res.status(500).json({ message: "Internal server error" });
+        }
     }
 };
 exports.createPurchaseController = createPurchaseController;
+class ClientError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ClientError";
+    }
+}

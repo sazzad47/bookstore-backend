@@ -1,4 +1,4 @@
-tags :
+tags:
   - Purchase
 summary: Purchase a book
 description: Purchase a book
@@ -14,16 +14,21 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../bodies/Purchase.yaml
+      $ref: '../../bodies/Purchase.yaml'
   
 responses:
-  200:
+  201:
     description: Book purchased successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: '../../definitions/Purchase.yaml'
   400:
     description: Error in purchasing book
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: '../../definitions/CommonResponse.yaml'
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'

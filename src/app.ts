@@ -19,7 +19,7 @@ const swaggerData = fs.readFileSync(swaggerFile, 'utf8');
 const swaggerJSON = JSON.parse(swaggerData);
 
 // Serve Swagger UI
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
 // routes
 app.use("/api", routes);

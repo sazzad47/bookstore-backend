@@ -20,7 +20,7 @@ const swaggerFile = `${process.cwd()}/swagger/index.json`;
 const swaggerData = fs_1.default.readFileSync(swaggerFile, 'utf8');
 const swaggerJSON = JSON.parse(swaggerData);
 // Serve Swagger UI
-app.use("/", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerJSON));
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerJSON));
 // routes
 app.use("/api", routes_1.default);
 // Error handling middleware
