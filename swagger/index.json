@@ -55,14 +55,21 @@
         ],
         "responses": {
           "201": {
-            "description": "Book purchased successfully",
+            "description": "Created",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Purchase"
             }
           },
           "400": {
-            "description": "Error in purchasing book",
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -90,16 +97,28 @@
         ],
         "responses": {
           "200": {
-            "description": "Books fetched successfully",
+            "description": "Ok",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Book"
-              }
+              "type": "object",
+              "$ref": "#/definitions/Book"
             }
           },
           "400": {
-            "description": "Error in fetching books",
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -151,15 +170,29 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Book saved successfully",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
-          "400": {
-            "description": "Error in saving book",
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -189,14 +222,28 @@
         ],
         "responses": {
           "200": {
-            "description": "Book fetched successfully",
+            "description": "Ok",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Book"
             }
           },
           "400": {
-            "description": "Error in fetching book",
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -237,14 +284,28 @@
         ],
         "responses": {
           "200": {
-            "description": "Book updated successfully",
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
-          "400": {
-            "description": "Error in updating book",
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -275,14 +336,28 @@
         ],
         "responses": {
           "200": {
-            "description": "Book deleted successfully",
+            "description": "Deleted successfully",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
           "400": {
-            "description": "Error in deleting book",
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"

@@ -18,7 +18,7 @@ parameters:
   
 responses:
   201:
-    description: Ok
+    description: Created
     schema:
       type: object
       $ref: '../../definitions/Purchase.yaml'

@@ -78,8 +78,8 @@ const deleteBookController = async (req, res, next) => {
         if (!deletedBook) {
             throw new customError_1.CustomError("Not Found", httpStatusCodes_1.httpStatusCodes.NOT_FOUND, "Book not found");
         }
-        // Respond with the deleted book
-        res.json(deletedBook);
+        // Respond with the success message
+        res.json({ message: "Deleted successfully" });
     }
     catch (error) {
         next(error);

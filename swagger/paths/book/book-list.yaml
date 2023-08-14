@@ -6,13 +6,22 @@ produces:
   - application/json
 responses:
   200:
-    description: Books fetched successfully
-    schema:
-      type: array
-      items:
-        $ref: ../../definitions/Book.yaml
-  400:
-    description: Error in fetching books
+    description: Ok
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/Book.yaml
+  400:
+    description: Bad Request
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
+  404:
+    description: Not found
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'

@@ -17,13 +17,23 @@ parameters:
       $ref: ../../bodies/Book.yaml
   
 responses:
-  200:
-    description: Book saved successfully
+  201:
+    description: Created
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: '../../definitions/Book.yaml'
   400:
-    description: Error in saving book
+    description: Bad Request
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: '../../definitions/CommonResponse.yaml'
+  404:
+    description: Not found
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'

@@ -15,12 +15,22 @@ parameters:
     type: string
 responses:
   200:
-    description: Book deleted successfully
+    description: Deleted successfully
     schema:
       type: object
       $ref: ../../definitions/CommonResponse.yaml
   400:
-    description: Error in deleting book
+    description: Bad Request
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: '../../definitions/CommonResponse.yaml'
+  404:
+    description: Not found
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
+  500:
+    description: Internal server error
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
