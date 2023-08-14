@@ -1,0 +1,24 @@
+tags :
+  - Book
+summary: Get a book
+description: Get a book with the id specified in parameter
+produces:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Book id that needs to be fetched
+    required: true
+    type: string
+responses:
+  200:
+    description: Book fetched successfully
+    schema:
+      type: object
+      $ref: ../../definitions/Book.yaml
+  400:
+    description: Error in fetching book
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

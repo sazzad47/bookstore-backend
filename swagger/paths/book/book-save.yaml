@@ -1,35 +1,29 @@
 tags :
-  - Product
-summary: Update a product
-description: Update a product
+  - Book
+summary: Save a new book
+description: Save a new book
 produces:
   - application/json
 consumes:
   - application/json
 parameters:
   - 
-    in: path
-    name: id
-    description: Product id that needs to be updated
-    required: true
-    type: string
-  - 
     in: body
     name: body
-    description: Product object
+    description: Book object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Product.yaml
+      $ref: ../../definitions/Book.yaml
   
 responses:
   200:
-    description: Product updated successfully
+    description: Book saved successfully
     schema:
       type: object
       $ref: ../../definitions/CommonResponse.yaml
   400:
-    description: Error in updating product
+    description: Error in saving book
     schema:
       type: object
       $ref: ../../definitions/CommonResponse.yaml

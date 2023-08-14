@@ -1,28 +1,19 @@
-# Contact API
-/contact:
-  get:
-    $ref: ./contact/contact-list.yaml
+# Purchase API
+/purchase:
   post:
-    $ref: ./contact/contact-save.yaml
-/contact/{id}:
-  get:
-    $ref: ./contact/contact-get.yaml
-  put:
-    $ref: ./contact/contact-update.yaml
-  delete:
-    $ref: ./contact/contact-delete.yaml
+    $ref: ./purchase/purchase-save.yaml
 
-# Product API
-/product:
+# Book API
+/book:
   get:
-    $ref: ./product/product-list.yaml
+    $ref: ./book/book-list.yaml
   post:
-    $ref: ./product/product-save.yaml
-/product/{id}:
+    $ref: ./book/book-save.yaml
+/book/{id}:
   get:
-    $ref: ./product/product-get.yaml
+    $ref: ./book/book-get.yaml
   put:
-    $ref: ./product/product-update.yaml
+    $ref: ./book/book-update.yaml
   delete:
-    $ref: ./product/product-delete.yaml
+    $ref: ./book/book-delete.yaml
 

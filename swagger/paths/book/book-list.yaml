@@ -1,0 +1,18 @@
+tags :
+  - Book
+summary: Get all the books
+description: Get all the books
+produces:
+  - application/json
+responses:
+  200:
+    description: Books fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/Book.yaml
+  400:
+    description: Error in fetching books
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

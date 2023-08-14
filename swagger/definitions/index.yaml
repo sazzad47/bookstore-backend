@@ -1,6 +1,6 @@
 CommonResponse:
   $ref: ./CommonResponse.yaml
-Contact:
-  $ref: ./Contact.yaml
-Product:
-  $ref: ./Product.yaml
+Purchase:
+  $ref: ./Purchase.yaml
+Book:
+  $ref: ./Book.yaml

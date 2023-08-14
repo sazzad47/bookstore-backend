@@ -1,29 +1,35 @@
 tags :
-  - Contact
-summary: Save a new contact
-description: Save a new contact
+  - Book
+summary: Update a book
+description: Update a book
 produces:
   - application/json
 consumes:
   - application/json
 parameters:
   - 
+    in: path
+    name: id
+    description: Book id that needs to be updated
+    required: true
+    type: string
+  - 
     in: body
     name: body
-    description: Contact object
+    description: Book object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Contact.yaml
+      $ref: ../../definitions/Book.yaml
   
 responses:
   200:
-    description: Contact saved successfully
+    description: Book updated successfully
     schema:
       type: object
       $ref: ../../definitions/CommonResponse.yaml
   400:
-    description: Error in saving contact
+    description: Error in updating book
     schema:
       type: object
       $ref: ../../definitions/CommonResponse.yaml

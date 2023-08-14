@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: integer
+  book:
+    type: object
+  userId:
+    type: integer
+  quantity:
+    type: integer
+  totalPrice:
+    type: number
+    format: decimal
+    precision: 10
+    scale: 2
