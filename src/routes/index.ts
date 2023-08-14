@@ -4,7 +4,7 @@ import bookRouter from "./book.routes";
 
 const router = express.Router();
 
-router.use("/purchases", purchaseRouter);
-router.use("/books", bookRouter); 
+router.use("/purchase", purchaseRouter);
+router.use("/book", bookRouter); 
 
 export default router;
