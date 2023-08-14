@@ -17,5 +17,11 @@ class BookRepository {
     async findOneBook(bookId) {
         return this.repository.findOne({ where: { id: bookId } });
     }
+    async updateBook(updatedBook) {
+        await this.repository.update({ id: updatedBook.id }, updatedBook);
+    }
+    async deleteBook(bookId) {
+        await this.repository.delete(bookId);
+    }
 }
 exports.BookRepository = BookRepository;

@@ -8,4 +8,7 @@ const book_controller_1 = require("../controllers/book.controller");
 const bookRouter = express_1.default.Router();
 bookRouter.get("/", book_controller_1.getAllBooksController);
 bookRouter.post("/", book_controller_1.createBookController);
+bookRouter.get("/:bookId", book_controller_1.getBookByIdController);
+bookRouter.put("/:bookId", book_controller_1.updateBookController);
+bookRouter.delete("/:bookId", book_controller_1.deleteBookController);
 exports.default = bookRouter;

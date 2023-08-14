@@ -18,7 +18,14 @@ export class BookRepository {
   }
 
   async findOneBook(bookId: number): Promise<Book | null> {
-    return this.repository.findOne({where: {id: bookId}});
+    return this.repository.findOne({ where: { id: bookId } });
   }
 
+  async updateBook(updatedBook: Book): Promise<void> {
+    await this.repository.update({ id: updatedBook.id }, updatedBook);
+  }
+
+  async deleteBook(bookId: number): Promise<void> {
+    await this.repository.delete(bookId);
+  }
 }

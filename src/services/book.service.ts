@@ -27,7 +27,6 @@ export class BookService {
   }
 
   async getAllBooks(): Promise<Book[]> {
-    // Fetch all books from the repository
     const books = await this.bookRepository.findAllBooks();
 
     if (books.length === 0) {
@@ -38,7 +37,6 @@ export class BookService {
   }
 
   async getBookById(bookId: number): Promise<Book | null> {
-    // Fetch the book from the repository
     const book = await this.bookRepository.findOneBook(bookId);
 
     if (!book) {
@@ -47,4 +45,39 @@ export class BookService {
 
     return book;
   }
+
+  async updateBook(bookId: number, updatedBookData: Book): Promise<Book | null> {
+    const existingBook = await this.getBookById(bookId);
+  
+    if (!existingBook) {
+      throw new CustomError("Not Found", httpStatusCodes.NOT_FOUND, "Book not found");
+    }
+  
+    // Validation checks for updatedBookData 
+    if (updatedBookData.discountRate !== undefined && (updatedBookData.discountRate < 1 || updatedBookData.discountRate > 99)) {
+      throw new CustomError("Invalid Input", httpStatusCodes.BAD_REQUEST, "Discount rate must be between 1 and 99");
+    }
+  
+    if (updatedBookData.price !== undefined && updatedBookData.price <= 0) {
+      throw new CustomError("Invalid Input", httpStatusCodes.BAD_REQUEST, "Price must be greater than 0");
+    }
+  
+    const mergedBook = { ...existingBook, ...updatedBookData };
+    await this.bookRepository.updateBook(mergedBook);
+  
+    return mergedBook;
+  }
+  
+  async deleteBook(bookId: number): Promise<Book | null> {
+    const existingBook = await this.getBookById(bookId);
+  
+    if (existingBook) {
+      await this.bookRepository.deleteBook(bookId);
+      return existingBook;
+    } else {
+      throw new CustomError("Not Found", httpStatusCodes.NOT_FOUND, "Book not found");
+    }
+  }
+  
+  
 }

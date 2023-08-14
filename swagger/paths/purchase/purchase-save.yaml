@@ -18,12 +18,17 @@ parameters:
   
 responses:
   201:
-    description: Book purchased successfully
+    description: Ok
     schema:
       type: object
       $ref: '../../definitions/Purchase.yaml'
   400:
-    description: Error in purchasing book
+    description: Bad Request
+    schema:
+      type: object
+      $ref: '../../definitions/CommonResponse.yaml'
+  404:
+    description: Not found
     schema:
       type: object
       $ref: '../../definitions/CommonResponse.yaml'
