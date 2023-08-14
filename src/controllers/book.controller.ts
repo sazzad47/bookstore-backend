@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { BookService } from "../services/book.service";
 import { BookRepository } from "../repositories/book.repository";
 
@@ -6,7 +6,7 @@ import { BookRepository } from "../repositories/book.repository";
 const bookRepository = new BookRepository();
 const bookService = new BookService(bookRepository);
 
-export const getAllBooksController = async (_req: Request, res: Response) => {
+export const getAllBooksController = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     // Get all books from the service
     const books = await bookService.getAllBooks();
@@ -14,12 +14,11 @@ export const getAllBooksController = async (_req: Request, res: Response) => {
     // Respond with the list of books
     res.json(books);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-export const createBookController = async (req: Request, res: Response) => {
+export const createBookController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { title, description, discountRate, coverImage, price } = req.body;
 
@@ -36,6 +35,6 @@ export const createBookController = async (req: Request, res: Response) => {
     res.status(201).json(newBook);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };

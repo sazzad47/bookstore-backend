@@ -1,5 +1,7 @@
 import { BookRepository } from "../repositories/book.repository";
 import { Book } from "../entities/book.entity";
+import { CustomError } from "../errors/customError";
+import { httpStatusCodes } from "../errors/httpStatusCodes";
 
 export class BookService {
   private bookRepository: BookRepository;
@@ -7,18 +9,18 @@ export class BookService {
   constructor(bookRepository: BookRepository) {
     this.bookRepository = bookRepository;
   }
-  
+
   async createBook(newBook: Book): Promise<Book> {
     if (!newBook.title || !newBook.price || !newBook.description || !newBook.discountRate || !newBook.coverImage) {
-      throw new Error("All book fields are required to create a book");
+      throw new CustomError("Invalid Input", httpStatusCodes.BAD_REQUEST, "All book fields are required to create a book");
     }
 
     if (newBook.discountRate < 1 || newBook.discountRate > 99) {
-      throw new Error("Discount rate must be between 1 and 99");
+      throw new CustomError("Invalid Input", httpStatusCodes.BAD_REQUEST, "Discount rate must be between 1 and 99");
     }
 
     if (newBook.price <= 0) {
-      throw new Error("Price must be greater than 0");
+      throw new CustomError("Invalid Input", httpStatusCodes.BAD_REQUEST, "Price must be greater than 0");
     }
 
     return this.bookRepository.createBook(newBook);
@@ -29,7 +31,7 @@ export class BookService {
     const books = await this.bookRepository.findAllBooks();
 
     if (books.length === 0) {
-      throw new Error("No books found.");
+      throw new CustomError("Not Found", httpStatusCodes.NOT_FOUND, "No books found.");
     }
 
     return books;
@@ -40,7 +42,7 @@ export class BookService {
     const book = await this.bookRepository.findOneBook(bookId);
 
     if (!book) {
-      throw new Error("Book not found");
+      throw new CustomError("Not Found", httpStatusCodes.NOT_FOUND, "Book not found");
     }
 
     return book;

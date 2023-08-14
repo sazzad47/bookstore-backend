@@ -4,7 +4,12 @@ import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
-import fs from 'fs';
+import fs from "fs";
+import {
+  isOperationalError,
+  logError,
+  returnError,
+} from "./middleware/errorHandler";
 
 const app = express();
 
@@ -15,7 +20,7 @@ app.use(morgan("dev"));
 
 // Read Swagger JSON from file
 const swaggerFile = `${process.cwd()}/swagger/index.json`;
-const swaggerData = fs.readFileSync(swaggerFile, 'utf8');
+const swaggerData = fs.readFileSync(swaggerFile, "utf8");
 const swaggerJSON = JSON.parse(swaggerData);
 
 // Serve Swagger UI
@@ -25,10 +30,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 app.use("/api", routes);
 
 // Error handling middleware
-app.use((error: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error(error);
-  res.status(500).json({ message: "Internal server error" });
-});
+app.use(logError);
+app.use(returnError);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

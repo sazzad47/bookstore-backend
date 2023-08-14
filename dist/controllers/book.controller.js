@@ -6,7 +6,7 @@ const book_repository_1 = require("../repositories/book.repository");
 // Initialize repository and service
 const bookRepository = new book_repository_1.BookRepository();
 const bookService = new book_service_1.BookService(bookRepository);
-const getAllBooksController = async (_req, res) => {
+const getAllBooksController = async (_req, res, next) => {
     try {
         // Get all books from the service
         const books = await bookService.getAllBooks();
@@ -14,12 +14,11 @@ const getAllBooksController = async (_req, res) => {
         res.json(books);
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        next(error);
     }
 };
 exports.getAllBooksController = getAllBooksController;
-const createBookController = async (req, res) => {
+const createBookController = async (req, res, next) => {
     try {
         const { title, description, discountRate, coverImage, price } = req.body;
         // Create the book using the service
@@ -35,7 +34,7 @@ const createBookController = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        next(error);
     }
 };
 exports.createBookController = createBookController;
