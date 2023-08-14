@@ -2,7 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
-import routes from "./routes"; 
+import routes from "./routes";
+import swaggerUi from "swagger-ui-express";
+import fs from 'fs';
 
 const app = express();
 
@@ -11,10 +13,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
+// Read Swagger JSON from file
+const swaggerFile = `${process.cwd()}/swagger/index.json`;
+const swaggerData = fs.readFileSync(swaggerFile, 'utf8');
+const swaggerJSON = JSON.parse(swaggerData);
+
+// Serve Swagger UI
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
+
 // routes
-app.get('/', (req, res) => {
-  res.send('<h1>App is running</h1>');
-})
 app.use("/api", routes);
 
 // Error handling middleware
