@@ -7,6 +7,9 @@ const book_repository_1 = require("../repositories/book.repository");
 const createPurchaseController = async (req, res) => {
     try {
         const { userId, bookId, quantity } = req.body;
+        if (!userId || !bookId || !quantity) {
+            throw new ClientError("Invalid request parameters");
+        }
         // Create new instances of repositories for this request
         const purchaseRepository = new purchase_repository_1.PurchaseRepository();
         const bookRepository = new book_repository_1.BookRepository();
