@@ -1,0 +1,15 @@
+type: object
+properties:
+  title:
+    type: string
+  description:
+    type: string
+  discountRate:
+    type: number
+  coverImage:
+    type: string
+  price:
+    type: number
+    format: decimal
+    precision: 10
+    scale: 2

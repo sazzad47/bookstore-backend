@@ -8,8 +8,8 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-schemes: [http, https]
-host: localhost:5000
+schemes: [http]
+host: 43.205.241.24:5000
 basePath: /api
 paths:
   $ref: ./paths/index.yaml

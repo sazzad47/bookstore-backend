@@ -3,9 +3,9 @@
   "info": {
     "version": "1.0.0",
     "title": "API documenations using Swagger",
-    "description": "Sample project which generates API documentaion using swagger.",
+    "description": "Assessment project which generates API documentaion using swagger.",
     "contact": {
-      "email": "princekfrancis@gmail.com"
+      "email": "sazzad47.ju@gmail.com"
     },
     "license": {
       "name": "Apache 2.0",
@@ -13,34 +13,86 @@
     }
   },
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
-  "host": "localhost:3000",
+  "host": "43.205.241.24:5000",
   "basePath": "/api",
   "paths": {
-    "/contact": {
+    "/purchase": {
+      "post": {
+        "tags": [
+          "Purchase"
+        ],
+        "summary": "Purchase a book",
+        "description": "Purchase a book",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Purchase object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bookId": {
+                  "type": "integer"
+                },
+                "userId": {
+                  "type": "integer"
+                },
+                "quantity": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book purchased successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in purchasing book",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/book": {
       "get": {
         "tags": [
-          "Contact"
+          "Book"
         ],
-        "summary": "Get all the contacts",
-        "description": "Get all the contacts",
+        "summary": "Get all the books",
+        "description": "Get all the books",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "Contacts fetched successfully",
+            "description": "Books fetched successfully",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Contact"
+                "$ref": "#/definitions/Book"
               }
             }
           },
           "400": {
-            "description": "Error in fetching contacts",
+            "description": "Error in fetching books",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -50,10 +102,10 @@
       },
       "post": {
         "tags": [
-          "Contact"
+          "Book"
         ],
-        "summary": "Save a new contact",
-        "description": "Save a new contact",
+        "summary": "Save a new book",
+        "description": "Save a new book",
         "produces": [
           "application/json"
         ],
@@ -64,218 +116,43 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Contact object",
+            "description": "Book object",
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Contact"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact saved successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          },
-          "400": {
-            "description": "Error in saving contact",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      }
-    },
-    "/contact/{id}": {
-      "get": {
-        "tags": [
-          "Contact"
-        ],
-        "summary": "Get a contact",
-        "description": "Get a contact with the id specified in parameter",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Contact id that needs to be fetched",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact fetched successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Contact"
-            }
-          },
-          "400": {
-            "description": "Error in fetching contact",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Contact"
-        ],
-        "summary": "Update a contact",
-        "description": "Update a contact",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Contact id that needs to be updated",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Contact object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Contact"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact updated successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          },
-          "400": {
-            "description": "Error in updating contact",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Contact"
-        ],
-        "summary": "Delete a contact",
-        "description": "Delete a contact with the id specified in parameter",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Contact id that needs to be deleted",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact deleted successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          },
-          "400": {
-            "description": "Error in deleting contact",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      }
-    },
-    "/product": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Get all the products",
-        "description": "Get all the products",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Products fetched successfully",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Product"
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "discountRate": {
+                  "type": "number"
+                },
+                "coverImage": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number",
+                  "format": "decimal",
+                  "precision": 10,
+                  "scale": 2
+                }
               }
             }
-          },
-          "400": {
-            "description": "Error in fetching products",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Save a new product",
-        "description": "Save a new product",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Product object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/Product"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Product saved successfully",
+            "description": "Book saved successfully",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
           "400": {
-            "description": "Error in saving product",
+            "description": "Error in saving book",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -284,13 +161,13 @@
         }
       }
     },
-    "/product/{id}": {
+    "/book/{id}": {
       "get": {
         "tags": [
-          "Product"
+          "Book"
         ],
-        "summary": "Get a product",
-        "description": "Get a product with the id specified in parameter",
+        "summary": "Get a book",
+        "description": "Get a book with the id specified in parameter",
         "produces": [
           "application/json"
         ],
@@ -298,21 +175,21 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Product id that needs to be fetched",
+            "description": "Book id that needs to be fetched",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Product fetched successfully",
+            "description": "Book fetched successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Product"
+              "$ref": "#/definitions/Book"
             }
           },
           "400": {
-            "description": "Error in fetching product",
+            "description": "Error in fetching book",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -322,10 +199,10 @@
       },
       "put": {
         "tags": [
-          "Product"
+          "Book"
         ],
-        "summary": "Update a product",
-        "description": "Update a product",
+        "summary": "Update a book",
+        "description": "Update a book",
         "produces": [
           "application/json"
         ],
@@ -336,31 +213,31 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Product id that needs to be updated",
+            "description": "Book id that needs to be updated",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Product object",
+            "description": "Book object",
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Product"
+              "$ref": "#/definitions/Book"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Product updated successfully",
+            "description": "Book updated successfully",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
           "400": {
-            "description": "Error in updating product",
+            "description": "Error in updating book",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -370,10 +247,10 @@
       },
       "delete": {
         "tags": [
-          "Product"
+          "Book"
         ],
-        "summary": "Delete a product",
-        "description": "Delete a product with the id specified in parameter",
+        "summary": "Delete a book",
+        "description": "Delete a book with the id specified in parameter",
         "produces": [
           "application/json"
         ],
@@ -384,21 +261,21 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Product id that needs to be deleted",
+            "description": "Book id that needs to be deleted",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Product deleted successfully",
+            "description": "Book deleted successfully",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
             }
           },
           "400": {
-            "description": "Error in deleting product",
+            "description": "Error in deleting book",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -417,34 +294,52 @@
         }
       }
     },
-    "Contact": {
+    "Purchase": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "integer"
         },
-        "name": {
-          "type": "string"
+        "book": {
+          "type": "object"
         },
-        "mobile": {
-          "type": "string"
+        "userId": {
+          "type": "integer"
         },
-        "email": {
-          "type": "string"
+        "quantity": {
+          "type": "integer"
+        },
+        "totalPrice": {
+          "type": "number",
+          "format": "decimal",
+          "precision": 10,
+          "scale": 2
         }
       }
     },
-    "Product": {
+    "Book": {
       "type": "object",
       "properties": {
         "id": {
+          "type": "integer"
+        },
+        "title": {
           "type": "string"
         },
-        "name": {
+        "description": {
+          "type": "string"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "coverImage": {
           "type": "string"
         },
         "price": {
-          "type": "number"
+          "type": "number",
+          "format": "decimal",
+          "precision": 10,
+          "scale": 2
         }
       }
     }

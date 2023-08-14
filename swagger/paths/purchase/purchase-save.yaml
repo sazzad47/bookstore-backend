@@ -14,7 +14,7 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Purchase.yaml
+      $ref: ../../bodies/Purchase.yaml
   
 responses:
   200:

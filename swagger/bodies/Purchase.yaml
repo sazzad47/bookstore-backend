@@ -1,0 +1,8 @@
+type: object
+properties:
+  bookId:
+    type: integer
+  userId:
+    type: integer
+  quantity:
+    type: integer
