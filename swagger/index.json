@@ -92,6 +92,17 @@
         ],
         "summary": "Get all the books",
         "description": "Get all the books",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "produces": [
           "application/json"
         ],
