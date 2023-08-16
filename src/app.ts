@@ -6,8 +6,6 @@ import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 import {
-  isOperationalError,
-  logError,
   returnError,
 } from "./middleware/errorHandler";
 
@@ -23,14 +21,16 @@ const swaggerFile = `${process.cwd()}/swagger/index.json`;
 const swaggerData = fs.readFileSync(swaggerFile, "utf8");
 const swaggerJSON = JSON.parse(swaggerData);
 
+// routes
+app.get('/', (req, res) => {
+  res.send('The app is running.');
+});
+app.use("/api", routes);
+
 // Serve Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
-// routes
-app.use("/api", routes);
-
 // Error handling middleware
-app.use(logError);
 app.use(returnError);
 
 // Start the server
