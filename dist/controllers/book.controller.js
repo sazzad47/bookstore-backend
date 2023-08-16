@@ -8,12 +8,12 @@ const httpStatusCodes_1 = require("../errors/httpStatusCodes");
 // Initialize repository and service
 const bookRepository = new book_repository_1.BookRepository();
 const bookService = new book_service_1.BookService(bookRepository);
-const getAllBooksController = async (_req, res, next) => {
+const getAllBooksController = async (req, res, next) => {
     try {
-        // Get all books from the service
-        const books = await bookService.getAllBooks();
-        // Respond with the list of books
-        res.json(books);
+        const page = parseInt(req.query.page) || 1;
+        const perPage = 6;
+        const { books, totalCount, totalPages, remainingBooks } = await bookService.getPaginatedBooks(page, perPage);
+        res.json({ books, totalCount, totalPages, remainingBooks });
     }
     catch (error) {
         next(error);

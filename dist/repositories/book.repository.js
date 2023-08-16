@@ -11,8 +11,11 @@ class BookRepository {
     async createBook(newBook) {
         return this.repository.save(newBook);
     }
-    async findAllBooks() {
-        return this.repository.find();
+    async count() {
+        return this.repository.count();
+    }
+    async findPaginatedBooks(skip, perPage) {
+        return this.repository.find({ skip, take: perPage, order: { id: 'ASC' } });
     }
     async findOneBook(bookId) {
         return this.repository.findOne({ where: { id: bookId } });

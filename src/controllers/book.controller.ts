@@ -8,17 +8,20 @@ import { httpStatusCodes } from "../errors/httpStatusCodes";
 const bookRepository = new BookRepository();
 const bookService = new BookService(bookRepository);
 
-export const getAllBooksController = async (_req: Request, res: Response, next: NextFunction) => {
+export const getAllBooksController = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get all books from the service
-    const books = await bookService.getAllBooks();
+    const page = parseInt(req.query.page as string) || 1;
+    const perPage = 6;
 
-    // Respond with the list of books
-    res.json(books);
+    const { books, totalCount, totalPages, remainingBooks } = await bookService.getPaginatedBooks(page, perPage);
+
+    res.json({ books, totalCount, totalPages, remainingBooks });
   } catch (error) {
     next(error);
   }
 };
+
+
 
 export const createBookController = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -13,9 +13,13 @@ export class BookRepository {
     return this.repository.save(newBook);
   }
 
-  async findAllBooks(): Promise<Book[]> {
-    return this.repository.find();
+  async count(): Promise<number> {
+    return this.repository.count();
   }
+  
+  async findPaginatedBooks(skip: number, perPage: number): Promise<Book[]> {
+    return this.repository.find({ skip, take: perPage, order: { id: 'ASC' } });
+  }    
 
   async findOneBook(bookId: number): Promise<Book | null> {
     return this.repository.findOne({ where: { id: bookId } });
