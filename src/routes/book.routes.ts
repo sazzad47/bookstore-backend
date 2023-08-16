@@ -9,10 +9,19 @@ import {
 
 const bookRouter = express.Router();
 
+// Route to get all books
 bookRouter.get("/", getAllBooksController);
+
+// Route to create a new book
 bookRouter.post("/", createBookController);
-bookRouter.get("/:bookId", getBookByIdController); 
-bookRouter.put("/:bookId", updateBookController);  
-bookRouter.delete("/:bookId", deleteBookController); 
+
+// Route to get a book by its ID
+bookRouter.get("/:bookId", getBookByIdController);
+
+// Route to update a book by its ID
+bookRouter.put("/:bookId", updateBookController);
+
+// Route to delete a book by its ID
+bookRouter.delete("/:bookId", deleteBookController);
 
 export default bookRouter;

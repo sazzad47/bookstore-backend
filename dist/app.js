@@ -20,12 +20,13 @@ app.use((0, morgan_1.default)("dev"));
 const swaggerFile = `${process.cwd()}/swagger/index.json`;
 const swaggerData = fs_1.default.readFileSync(swaggerFile, "utf8");
 const swaggerJSON = JSON.parse(swaggerData);
-// routes
+// Define a route for the root URL
 app.get('/', (req, res) => {
     res.send('The app is running.');
 });
+// Set up API routes
 app.use("/api", routes_1.default);
-// Serve Swagger UI
+// Serve Swagger UI at /api-docs
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerJSON));
 // Error handling middleware
 app.use(errorHandler_1.returnError);

@@ -9,6 +9,7 @@ class BookService {
         this.bookRepository = bookRepository;
     }
     async createBook(newBook) {
+        // Validation checks for required fields and valid values
         if (!newBook.title ||
             !newBook.price ||
             !newBook.description ||
@@ -25,6 +26,7 @@ class BookService {
         return this.bookRepository.createBook(newBook);
     }
     async getPaginatedBooks(page, perPage) {
+        // Calculate pagination values and retrieve paginated books
         const totalCount = await this.bookRepository.count();
         const totalPages = Math.ceil(totalCount / perPage);
         if (page < 1) {

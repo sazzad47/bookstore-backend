@@ -8,6 +8,9 @@ const httpStatusCodes_1 = require("../errors/httpStatusCodes");
 // Initialize repository and service
 const bookRepository = new book_repository_1.BookRepository();
 const bookService = new book_service_1.BookService(bookRepository);
+/**
+ * Controller to get paginated list of books.
+ */
 const getAllBooksController = async (req, res, next) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -20,6 +23,9 @@ const getAllBooksController = async (req, res, next) => {
     }
 };
 exports.getAllBooksController = getAllBooksController;
+/**
+ * Controller to create a new book.
+ */
 const createBookController = async (req, res, next) => {
     try {
         const { title, description, discountRate, coverImage, price } = req.body;
@@ -40,6 +46,9 @@ const createBookController = async (req, res, next) => {
     }
 };
 exports.createBookController = createBookController;
+/**
+ * Controller to get a book by its ID.
+ */
 const getBookByIdController = async (req, res, next) => {
     try {
         const bookId = parseInt(req.params.bookId);
@@ -53,6 +62,9 @@ const getBookByIdController = async (req, res, next) => {
     }
 };
 exports.getBookByIdController = getBookByIdController;
+/**
+ * Controller to update a book.
+ */
 const updateBookController = async (req, res, next) => {
     try {
         const bookId = parseInt(req.params.bookId);
@@ -70,6 +82,9 @@ const updateBookController = async (req, res, next) => {
     }
 };
 exports.updateBookController = updateBookController;
+/**
+ * Controller to delete a book.
+ */
 const deleteBookController = async (req, res, next) => {
     try {
         const bookId = parseInt(req.params.bookId);

@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Purchase = void 0;
 const typeorm_1 = require("typeorm");
 const book_entity_1 = require("./book.entity");
+/**
+ * Entity representing a Purchase in the database.
+ */
 let Purchase = exports.Purchase = class Purchase {
     id;
     book;

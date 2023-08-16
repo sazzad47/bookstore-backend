@@ -6,7 +6,7 @@ import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 import {
-  returnError,
+    returnError,
 } from "./middleware/errorHandler";
 
 const app = express();
@@ -21,13 +21,15 @@ const swaggerFile = `${process.cwd()}/swagger/index.json`;
 const swaggerData = fs.readFileSync(swaggerFile, "utf8");
 const swaggerJSON = JSON.parse(swaggerData);
 
-// routes
+// Define a route for the root URL
 app.get('/', (req, res) => {
-  res.send('The app is running.');
+    res.send('The app is running.');
 });
+
+// Set up API routes
 app.use("/api", routes);
 
-// Serve Swagger UI
+// Serve Swagger UI at /api-docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
 // Error handling middleware
@@ -36,5 +38,5 @@ app.use(returnError);
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

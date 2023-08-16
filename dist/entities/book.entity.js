@@ -11,6 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Book = void 0;
 const typeorm_1 = require("typeorm");
+/**
+ * Entity representing a Book in the database.
+ */
 let Book = exports.Book = class Book {
     id;
     title;

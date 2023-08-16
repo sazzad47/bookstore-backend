@@ -8,21 +8,27 @@ class BookRepository {
     constructor() {
         this.repository = ormconfig_1.dataSource.getRepository(book_entity_1.Book);
     }
+    // Create a new book
     async createBook(newBook) {
         return this.repository.save(newBook);
     }
+    // Count the number of books in the repository
     async count() {
         return this.repository.count();
     }
+    // Find and return an array of paginated books
     async findPaginatedBooks(skip, perPage) {
         return this.repository.find({ skip, take: perPage, order: { id: 'ASC' } });
     }
+    // Find a book by its ID
     async findOneBook(bookId) {
         return this.repository.findOne({ where: { id: bookId } });
     }
+    // Update a book's information
     async updateBook(updatedBook) {
         await this.repository.update({ id: updatedBook.id }, updatedBook);
     }
+    // Delete a book by its ID
     async deleteBook(bookId) {
         await this.repository.delete(bookId);
     }

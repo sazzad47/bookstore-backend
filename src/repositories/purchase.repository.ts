@@ -4,25 +4,25 @@ import { dataSource } from "../ormconfig";
 import { Book } from "../entities/book.entity";
 
 export class PurchaseRepository {
-  private repository: Repository<Purchase>;
+    private repository: Repository<Purchase>;
 
-  constructor() {
-    this.repository = dataSource.getRepository(Purchase);
-  }
+    constructor() {
+        this.repository = dataSource.getRepository(Purchase);
+    }
 
-  async createPurchase(
-    userId: number,
-    book: Book,
-    quantity: number,
-    totalPrice: number
-  ): Promise<Purchase> {
-    const purchase = new Purchase();
-    purchase.userId = userId;
-    purchase.book = book;
-    purchase.quantity = quantity;
-    purchase.totalPrice = totalPrice;
+    // Create a new purchase
+    async createPurchase(
+        userId: number,
+        book: Book,
+        quantity: number,
+        totalPrice: number
+    ): Promise<Purchase> {
+        const purchase = new Purchase();
+        purchase.userId = userId;
+        purchase.book = book;
+        purchase.quantity = quantity;
+        purchase.totalPrice = totalPrice;
 
-    return this.repository.save(purchase);
-  }
-
+        return this.repository.save(purchase);
+    }
 }

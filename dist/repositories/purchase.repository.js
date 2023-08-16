@@ -8,6 +8,7 @@ class PurchaseRepository {
     constructor() {
         this.repository = ormconfig_1.dataSource.getRepository(purchase_entity_1.Purchase);
     }
+    // Create a new purchase
     async createPurchase(userId, book, quantity, totalPrice) {
         const purchase = new purchase_entity_1.Purchase();
         purchase.userId = userId;
