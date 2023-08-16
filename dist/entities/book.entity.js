@@ -21,13 +21,14 @@ let Book = exports.Book = class Book {
     discountRate;
     coverImage;
     price;
+    stock;
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Book.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "varchar", length: 255 }),
     __metadata("design:type", String)
 ], Book.prototype, "title", void 0);
 __decorate([
@@ -46,6 +47,10 @@ __decorate([
     (0, typeorm_1.Column)({ type: "decimal", precision: 10, scale: 2 }),
     __metadata("design:type", Number)
 ], Book.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "int", default: 0 }),
+    __metadata("design:type", Number)
+], Book.prototype, "stock", void 0);
 exports.Book = Book = __decorate([
     (0, typeorm_1.Entity)()
 ], Book);

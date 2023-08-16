@@ -1,3 +1,4 @@
+import { dataSource } from "../ormconfig";
 import { PurchaseRepository } from "../repositories/purchase.repository";
 import { BookRepository } from "../repositories/book.repository";
 import { Purchase } from "../entities/purchase.entity";
@@ -21,83 +22,60 @@ export class PurchaseService {
         quantity: number,
         bookId: number
     ): Promise<Purchase> {
-        // Check if required parameters are provided by the client
-        if (
-            userId === undefined ||
-            quantity === undefined ||
-            bookId === undefined
-        ) {
-            throw new CustomError(
-                "Missing Input",
-                httpStatusCodes.BAD_REQUEST,
-                "Required parameters are missing."
-            );
-        }
+        const queryRunner = dataSource.createQueryRunner();
+        let purchase: Purchase | undefined;
 
-        // Validate input parameters
-        if (userId <= 0) {
-            throw new CustomError(
-                "Invalid Input",
-                httpStatusCodes.BAD_REQUEST,
-                "Invalid userId."
-            );
-        }
+        try {
+            await queryRunner.connect();
+            await queryRunner.startTransaction();
 
-        if (quantity <= 0) {
-            throw new CustomError(
-                "Invalid Input",
-                httpStatusCodes.BAD_REQUEST,
-                "Invalid quantity."
-            );
-        }
+            const book = await this.bookRepository.findOneBook(bookId);
 
-        if (bookId <= 0) {
-            throw new CustomError(
-                "Invalid Input",
-                httpStatusCodes.BAD_REQUEST,
-                "Invalid bookId."
-            );
-        }
-
-        const book = await this.bookRepository.findOneBook(bookId);
-
-        if (!book) {
-            throw new CustomError(
-                "Error",
-                httpStatusCodes.NOT_FOUND,
-                `Book with id: ${bookId} not found.`
-            );
-        }
-
-        let totalPrice = 0;
-
-        // Calculate the totalPrice only if book.price is defined
-        if (book.price !== undefined) {
-            totalPrice = book.price * quantity;
-
-            if (
-                book.discountRate !== undefined &&
-                book.discountRate > 0 &&
-                book.discountRate < 100
-            ) {
-                const discountedPrice = book.price * (1 - book.discountRate / 100);
-                totalPrice = discountedPrice * quantity;
+            if (!book) {
+                throw new CustomError(
+                    "Error",
+                    httpStatusCodes.NOT_FOUND,
+                    `Book with id: ${bookId} not found.`
+                );
             }
-        }
 
-        const purchase = await this.purchaseRepository.createPurchase(
-            userId,
-            book,
-            quantity,
-            totalPrice
-        );
+            if (book.stock === undefined || book.stock < quantity) {
+                throw new CustomError(
+                    "Insufficient Stock",
+                    httpStatusCodes.BAD_REQUEST,
+                    "Not enough stock available for purchase."
+                );
+            }
 
-        if (!purchase) {
-            throw new CustomError(
-                "Error",
-                httpStatusCodes.INTERNAL_SERVER,
-                "Failed to create purchase"
+            // Update the book's stock quantity
+            const newStock = book.stock - quantity;
+            await this.bookRepository.updateBookStock(bookId, newStock);
+
+            // Calculate totalPrice
+            let totalPrice = 0;
+            if (book.price !== undefined) {
+                totalPrice = book.price * quantity;
+                if (book.discountRate !== undefined && book.discountRate > 0 && book.discountRate < 100) {
+                    const discountedPrice = book.price * (1 - book.discountRate / 100);
+                    totalPrice = discountedPrice * quantity;
+                }
+            }
+
+            // Create the purchase record using the repository
+            const newPurchase = await this.purchaseRepository.createPurchase(
+                userId,
+                book,
+                quantity,
+                totalPrice
             );
+
+            await queryRunner.commitTransaction();
+            purchase = newPurchase;
+        } catch (error) {
+            await queryRunner.rollbackTransaction();
+            throw error;
+        } finally {
+            await queryRunner.release();
         }
 
         return purchase;

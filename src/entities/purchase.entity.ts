@@ -9,14 +9,14 @@ export class Purchase {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @ManyToOne(() => Book)
+    @ManyToOne(() => Book, { eager: true }) 
     @JoinColumn()
     book?: Book;
 
-    @Column()
+    @Column({ type: "int" }) 
     userId?: number;
 
-    @Column()
+    @Column({ type: "int" }) 
     quantity?: number;
 
     @Column({ type: "decimal", precision: 10, scale: 2 }) 

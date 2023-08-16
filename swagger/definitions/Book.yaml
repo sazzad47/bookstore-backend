@@ -15,3 +15,6 @@ properties:
     format: decimal
     precision: 10
     scale: 2
+  stock:
+    type: integer
+    default: 0

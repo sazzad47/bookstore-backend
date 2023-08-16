@@ -27,16 +27,16 @@ __decorate([
     __metadata("design:type", Number)
 ], Purchase.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => book_entity_1.Book),
+    (0, typeorm_1.ManyToOne)(() => book_entity_1.Book, { eager: true }),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", book_entity_1.Book)
 ], Purchase.prototype, "book", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "int" }),
     __metadata("design:type", Number)
 ], Purchase.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "int" }),
     __metadata("design:type", Number)
 ], Purchase.prototype, "quantity", void 0);
 __decorate([

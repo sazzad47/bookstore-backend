@@ -8,7 +8,7 @@ export class Book {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column()
+    @Column({ type: "varchar", length: 255 }) 
     title?: string;
 
     @Column({ nullable: true })
@@ -22,4 +22,7 @@ export class Book {
 
     @Column({ type: "decimal", precision: 10, scale: 2 }) 
     price?: number;
+
+    @Column({ type: "int", default: 0 })
+    stock?: number; 
 }

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookRepository = void 0;
+const typeorm_1 = require("typeorm");
 const book_entity_1 = require("../entities/book.entity");
 const ormconfig_1 = require("../ormconfig");
 class BookRepository {
@@ -16,9 +17,14 @@ class BookRepository {
     async count() {
         return this.repository.count();
     }
-    // Find and return an array of paginated books
+    // Find and return an array of paginated books with available stock
     async findPaginatedBooks(skip, perPage) {
-        return this.repository.find({ skip, take: perPage, order: { id: 'ASC' } });
+        return this.repository.find({
+            where: { stock: (0, typeorm_1.MoreThan)(0) },
+            skip,
+            take: perPage,
+            order: { id: 'ASC' }
+        });
     }
     // Find a book by its ID
     async findOneBook(bookId) {
@@ -27,6 +33,10 @@ class BookRepository {
     // Update a book's information
     async updateBook(updatedBook) {
         await this.repository.update({ id: updatedBook.id }, updatedBook);
+    }
+    // Update a book's stock
+    async updateBookStock(bookId, newStock) {
+        await this.repository.update({ id: bookId }, { stock: newStock });
     }
     // Delete a book by its ID
     async deleteBook(bookId) {
