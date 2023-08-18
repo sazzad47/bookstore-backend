@@ -28,7 +28,7 @@ exports.getAllBooksController = getAllBooksController;
  */
 const createBookController = async (req, res, next) => {
     try {
-        const { title, description, discountRate, coverImage, price } = req.body;
+        const { title, description, discountRate, coverImage, price, stock } = req.body;
         // Create the book using the service
         const newBook = await bookService.createBook({
             title,
@@ -36,6 +36,7 @@ const createBookController = async (req, res, next) => {
             discountRate,
             coverImage,
             price,
+            stock
         });
         // Respond with the created book
         res.status(201).json(newBook);
