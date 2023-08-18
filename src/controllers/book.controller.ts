@@ -29,7 +29,7 @@ export const getAllBooksController = async (req: Request, res: Response, next: N
  */
 export const createBookController = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { title, description, discountRate, coverImage, price } = req.body;
+        const { title, description, discountRate, coverImage, price, stock } = req.body;
 
         // Create the book using the service
         const newBook = await bookService.createBook({
@@ -38,6 +38,7 @@ export const createBookController = async (req: Request, res: Response, next: Ne
             discountRate,
             coverImage,
             price,
+            stock
         });
 
         // Respond with the created book

@@ -14,7 +14,8 @@ class BookService {
             !newBook.price ||
             !newBook.description ||
             !newBook.discountRate ||
-            !newBook.coverImage) {
+            !newBook.coverImage ||
+            !newBook.stock) {
             throw new customError_1.CustomError("Invalid Input", httpStatusCodes_1.httpStatusCodes.BAD_REQUEST, "All book fields are required to create a book");
         }
         if (newBook.discountRate < 1 || newBook.discountRate > 99) {
@@ -22,6 +23,9 @@ class BookService {
         }
         if (newBook.price <= 0) {
             throw new customError_1.CustomError("Invalid Input", httpStatusCodes_1.httpStatusCodes.BAD_REQUEST, "Price must be greater than 0");
+        }
+        if (newBook.stock <= 0) {
+            throw new customError_1.CustomError("Invalid Input", httpStatusCodes_1.httpStatusCodes.BAD_REQUEST, "Stock must be greater than 0");
         }
         return this.bookRepository.createBook(newBook);
     }
