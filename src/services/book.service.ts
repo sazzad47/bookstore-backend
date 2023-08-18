@@ -17,7 +17,8 @@ export class BookService {
             !newBook.price ||
             !newBook.description ||
             !newBook.discountRate ||
-            !newBook.coverImage
+            !newBook.coverImage ||
+            !newBook.stock
         ) {
             throw new CustomError(
                 "Invalid Input",
@@ -39,6 +40,14 @@ export class BookService {
                 "Invalid Input",
                 httpStatusCodes.BAD_REQUEST,
                 "Price must be greater than 0"
+            );
+        }
+
+        if (newBook.stock <= 0) {
+            throw new CustomError(
+                "Invalid Input",
+                httpStatusCodes.BAD_REQUEST,
+                "Stock must be greater than 0"
             );
         }
 
